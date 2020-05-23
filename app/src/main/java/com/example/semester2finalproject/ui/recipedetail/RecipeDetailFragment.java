@@ -1,4 +1,4 @@
-package com.example.semester2finalproject.ui.friend;
+package com.example.semester2finalproject.ui.recipedetail;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -14,25 +14,25 @@ import android.view.ViewGroup;
 
 import com.example.semester2finalproject.R;
 
-public class FriendFragment extends Fragment {
+public class RecipeDetailFragment extends Fragment {
 
-    private FriendViewModel mViewModel;
+    private RecipeDetailViewModel mViewModel;
 
-    public static FriendFragment newInstance() {
-        return new FriendFragment();
+    public static RecipeDetailFragment newInstance() {
+        return new RecipeDetailFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.friend_fragment, container, false);
+        return inflater.inflate(R.layout.recipe_detail_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(FriendViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(RecipeDetailViewModel.class);
         // TODO: Use the ViewModel
     }
 
