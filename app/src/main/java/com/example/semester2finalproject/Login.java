@@ -92,7 +92,7 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Welcome" + user.getProperty("username"), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Login.this, MainActivity.class);
 
-                    startActivity();
+                    startActivity(intent);
                 }
 
                 public void handleFault(BackendlessFault fault) {
