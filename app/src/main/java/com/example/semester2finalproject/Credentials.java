@@ -2,7 +2,7 @@ package com.example.semester2finalproject;
 
 public class Credentials {
 
-    public static final String API_KEY = "B1F570DB-46F5-49A6-B673-601C0585E5C1";
-    public static final String APP_ID = "1993616D-74D9-249B-FF4D-E2C9E83E9900";
+    public static final String API_KEY = "A5D4C6D3-AB0E-4ED6-991C-60E06A476418";
+    public static final String APP_ID = "3E051078-C6AF-3BCE-FF17-5695CD8C9000";
 
 }

@@ -1,64 +1,115 @@
 package com.example.semester2finalproject;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Login#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Login extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import com.backendless.Backendless;
+import com.backendless.BackendlessUser;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class Login extends AppCompatActivity {
 
-    public Login() {
-        // Required empty public constructor
+    public static final String TAG = Login.class.getSimpleName();
+    public static final String EXTRA_USERNAME = "login username";
+    public static final int REQUEST_CREATE_ACCOUNT = 1;
+
+    private TextView textViewCreateAccount;
+    private Button buttonLogin;
+    private EditText editTextUsername;
+    private EditText editTextPassword;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        // initialize backendless
+        Backendless.initApp(this,Credentials.APP_ID, Credentials.API_KEY);
+
+        wireWidgets();
+        setListeners();
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Login.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Login newInstance(String param1, String param2) {
-        Login fragment = new Login();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    private void setListeners() {
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginToBackendless();
+            }
+        });
+
+        textViewCreateAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO replace create account startActivity with startAcitivtyForResult
+                Intent createAccountIntent = new Intent(Login.this, RegistrationActivity.class);
+                createAccountIntent.putExtra(EXTRA_USERNAME, editTextUsername.getText().toString());
+                //startActivity(createAccountIntent);
+                startActivityForResult(createAccountIntent, REQUEST_CREATE_ACCOUNT);
+            }
+        });
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check what request is
+        if(requestCode == REQUEST_CREATE_ACCOUNT)
+        {
+            // check what requst is
+            if(resultCode == RESULT_OK)
+            {
+                // use the intent fro the parameter to extract the username and password
+                // and prefill them into the edittext fields here
+                editTextUsername.setText(data.getStringExtra(RegistrationActivity.EXTRA_USERNAME));
+                editTextPassword.setText(data.getStringExtra(RegistrationActivity.EXTRA_PASSWORD));
+
+            }
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+    private void loginToBackendless() {
+        String username = editTextUsername.getText().toString();
+        String password = editTextPassword.getText().toString();
+        if(!username.isEmpty() && !password.isEmpty()) {
+            //
+            // do not forget to call Backendless.initApp in the app initialization code
+
+            Backendless.UserService.login(username, password, new AsyncCallback<BackendlessUser>() {
+                public void handleResponse(BackendlessUser user) {
+                    // user has been logged in
+                    Toast.makeText(Login.this, "Welcome" + user.getProperty("username"), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Login.this, MainActivity.class);
+
+                    startActivity();
+                }
+
+                public void handleFault(BackendlessFault fault) {
+                    // login failed, to get the error code call fault.getCode()
+                    Toast.makeText(Login.this, fault.getDetail(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else  {
+            Toast.makeText(this, "Please enter a username and password ", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void wireWidgets() {
+        textViewCreateAccount = findViewById(R.id.textView_login_create_account);
+        buttonLogin = findViewById(R.id.button_login_login);
+        editTextUsername = findViewById(R.id.editText_login_username);
+        editTextPassword = findViewById(R.id.editText_login_password);
     }
 }
