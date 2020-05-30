@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,9 +34,6 @@ public class RecipeListFragment extends Fragment {
     private ListView listView;
     private RecipeAdapter recipeAdapter;
     private TextView textViewName;
-    private TextView textViewClumsiness;
-    private TextView textViewMoneyOwed;
-    private FloatingActionButton floatingActionButtonNewFriend;
     private Comparator<Recipe> comparator;
 
     public RecipeListFragment() {
@@ -71,7 +69,7 @@ public class RecipeListFragment extends Fragment {
             @Override
             public void handleResponse(final List<Recipe> foundFriends)
             {
-                recipeAdapter = new RecipeAdapter (foundFriends);
+                recipeAdapter = new RecipeAdapter(foundFriends);
                 listView.setAdapter(recipeAdapter);
 
                 // we're sure that the list of friends exists at this point in the code
@@ -111,6 +109,31 @@ public class RecipeListFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
+    private class RecipeAdapter extends ArrayAdapter{
+        private List<Recipe> friendsList;
+        private int position;
+
+        public RecipeAdapter(List<Recipe> friendsList) {
+            super(FriendListFragment.this, -1, friendsList);
+            this.friendsList = friendsList;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            this.position = position;
+            LayoutInflater inflater = getLayoutInflater();
+            if(convertView == null){
+                convertView = inflater.inflate(R.layout.item_friend, parent, false);
+            }
+
+            textViewName = convertView.findViewById(R.id.textview_recipe_name);
+
+            textViewName.setText(friendsList.get(position).getName());
+
+            return convertView;
+        }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
