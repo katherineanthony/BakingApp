@@ -18,9 +18,7 @@ import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -83,12 +81,12 @@ public class RecipeListFragment extends Fragment {
 
 
     private class RecipeAdapter extends ArrayAdapter {
-        private List<Recipe> friendsList;
+        private List<Recipe> recipeList;
         private int position;
 
         public RecipeAdapter(List<Recipe> friendsList) {
             super(RecipeListFragment.this.getContext(), -1, friendsList);
-            this.friendsList = friendsList;
+            this.recipeList = friendsList;
         }
 
         @Override
@@ -101,7 +99,7 @@ public class RecipeListFragment extends Fragment {
 
             textViewName = convertView.findViewById(R.id.textview_recipe_name);
 
-            textViewName.setText(friendsList.get(position).getRecipeName());
+            textViewName.setText(recipeList.get(position).getRecipeName());
 
             return convertView;
         }

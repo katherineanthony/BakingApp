@@ -6,7 +6,7 @@ import android.os.Parcelable;
 public class Recipe implements Parcelable{
     private String recipeName;
     private String ingredients;
-    private String instructions;
+    private String directions;
     //backendless specific
     private String objectId;
     private String ownerId;
@@ -49,12 +49,12 @@ public class Recipe implements Parcelable{
         this.ingredients = ingredients;
     }
 
-    public String getInstructions() {
-        return instructions;
+    public String getDirections() {
+        return directions;
     }
 
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
+    public void setDirections(String directions) {
+        this.directions = directions;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class Recipe implements Parcelable{
 
         dest.writeString(this.recipeName);
         dest.writeString(this.ingredients);
-        dest.writeString(this.instructions);
+        dest.writeString(this.directions);
         dest.writeString(this.objectId);
         dest.writeString(this.ownerId);
     }
@@ -76,7 +76,7 @@ public class Recipe implements Parcelable{
 
         this.recipeName = in.readString();
         this.ingredients = in.readString();
-        this.instructions = in.readString();
+        this.directions = in.readString();
         this.objectId = in.readString();
         this.ownerId = in.readString();
     }
