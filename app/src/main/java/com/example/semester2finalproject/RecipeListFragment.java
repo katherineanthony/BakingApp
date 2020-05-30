@@ -95,26 +95,26 @@ public class RecipeListFragment extends Fragment {
             @Override
             public void handleFault( BackendlessFault fault )
             {
-                Toast.makeText(FriendListActivity.this, fault.getDetail(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecipeListFragment.this, fault.getDetail(), Toast.LENGTH_SHORT).show();
                 // an error has occurred, the error code can be retrieved with fault.getCode()
             }
         });
     }
     private class FriendAdapter extends ArrayAdapter {
-        private List<Friend> friendsList;
+        private List<Recipe> recipeList;
         private int position;
 
-        public FriendAdapter(List<Friend> friendsList) {
-            super(FriendListActivity.this, -1, friendsList);
-            this.friendsList = friendsList;
+        public FriendAdapter(List<Recipe> recipeList) {
+            super(RecipeListFragment.this, -1, recipeList);
+            this.recipeList = recipeList;
         }
 
-        public List<Friend> getFriendsList() {
-            return friendsList;
+        public List<Recipe> getFriendsList() {
+            return recipeList;
         }
 
-        public void setFriendsList(List<Friend> friendsList) {
-            this.friendsList = friendsList;
+        public void setFriendsList(List<Recipe> friendsList) {
+            this.recipeList = friendsList;
         }
 
         @Override
@@ -122,16 +122,12 @@ public class RecipeListFragment extends Fragment {
             this.position = position;
             LayoutInflater inflater = getLayoutInflater();
             if(convertView == null){
-                convertView = inflater.inflate(R.layout.item_friend, parent, false);
+                convertView = inflater.inflate(R.layout.item_recipe, parent, false);
             }
 
-            textViewName = convertView.findViewById(R.id.textView_item_friend_name);
-            textViewClumsiness = convertView.findViewById(R.id.textView_item_friend_clumsiness);
-            textViewMoneyOwed = convertView.findViewById(R.id.textView_item_friend_money_owed);
+            textViewName = convertView.findViewById(R.id.textview_recipe_name);
 
-            textViewName.setText(friendsList.get(position).getName());
-            textViewClumsiness.setText(String.valueOf(friendsList.get(position).getClumsiness()));
-            textViewMoneyOwed.setText(String.valueOf(friendsList.get(position).getMoneyOwed()));
+            textViewName.setText(recipeList.get(position).getRecipeName());
 
             return convertView;
         }
