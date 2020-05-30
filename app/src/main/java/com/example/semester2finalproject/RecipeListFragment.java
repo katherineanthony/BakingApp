@@ -111,9 +111,9 @@ public class RecipeListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview =  inflater.inflate(R.layout.fragment_recipes, container, false);
-        loadDataFromBackendless();
-        wireWidgets(rootview);
 
+        wireWidgets(rootview);
+        loadDataFromBackendless();
         return rootview;
 
 
