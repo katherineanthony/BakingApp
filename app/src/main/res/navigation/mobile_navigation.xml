@@ -36,13 +36,13 @@
 
     <fragment
         android:id="@+id/nav_recipes"
-        android:name="com.example.semester2finalproject.Recipes"
+        android:name="com.example.semester2finalproject.RecipeListFragment"
         android:label="@string/Recipes"
         tools:layout="@layout/fragment_recipes" />
 
     <fragment
         android:id="@+id/nav_friends"
-        android:name="com.example.semester2finalproject.Friends"
+        android:name="com.example.semester2finalproject.FriendListFragment"
         android:label="@string/Friends"
         tools:layout="@layout/fragment_friends" />
 </navigation>

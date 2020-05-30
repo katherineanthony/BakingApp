@@ -4,20 +4,11 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,16 +19,15 @@ import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Recipes#newInstance} factory method to
+ * Use the {@link RecipeListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Recipes extends Fragment {
+public class RecipeListFragment extends Fragment {
     public static final String EXTRA_RECIPE = "Recipe";
 
     private ListView listView;
@@ -48,7 +38,7 @@ public class Recipes extends Fragment {
     private FloatingActionButton floatingActionButtonNewFriend;
     private Comparator<Recipe> comparator;
 
-    public Recipes() {
+    public RecipeListFragment() {
         // Required empty public constructor
     }
 
@@ -61,8 +51,8 @@ public class Recipes extends Fragment {
      * @return A new instance of fragment Recipes.
      */
     // TODO: Rename and change types and number of parameters
-    public static Recipes newInstance(String param1, String param2) {
-        Recipes fragment = new Recipes();
+    public static RecipeListFragment newInstance(String param1, String param2) {
+        RecipeListFragment fragment = new RecipeListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
