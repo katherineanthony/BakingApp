@@ -1,12 +1,15 @@
 package com.example.semester2finalproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,6 +18,8 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.DataQueryBuilder;
+import com.backendless.social.SocialLoginDialog;
 
 import java.util.List;
 
@@ -77,10 +82,24 @@ public class FriendListFragment extends Fragment {
         View rootview =  inflater.inflate(R.layout.fragment_friends, container, false);
         wireWidgets(rootview);
         setListeners();
+        DataQueryBuilder queryBuilder = DataQueryBuilder.create();
+        String whereClause = "objectId = '" + Backendless.UserService.CurrentUser().getObjectId() + "'";
+        queryBuilder.setWhereClause(whereClause);
+        queryBuilder.setRelationsDepth(2);
 
-        Backendless.Data.of(BackendlessUser.class).find(new AsyncCallback<List<BackendlessUser>>() {
+        Backendless.Data.of(BackendlessUser.class).find(queryBuilder, new AsyncCallback<List<BackendlessUser>>() {
             @Override
             public void handleResponse(List<BackendlessUser> response) {
+                Log.d("TEST", "handleResponse: " + response.toString());
+                friendAdapter = new FriendAdapter(response);
+                friendListView.setAdapter(friendAdapter);
+                friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent friendIntent = new Intent(FriendListFragment.this.getContext(), RecipeListFragment.class);
+                        startActivity(friendIntent);
+                    }
+                });
 
             }
 
@@ -89,7 +108,7 @@ public class FriendListFragment extends Fragment {
 
             }
         });
-        return inflater.inflate(R.layout.fragment_friends, container, false);
+        return rootview;
     }
 
     private void wireWidgets(View rootview) {
@@ -101,10 +120,10 @@ public class FriendListFragment extends Fragment {
     }
 
     private class FriendAdapter extends ArrayAdapter {
-        private List<Recipe> friendList;
+        private List<BackendlessUser> friendList;
         private int position;
 
-        public FriendAdapter(List<Recipe> friendsList) {
+        public FriendAdapter(List<BackendlessUser> friendsList) {
             super(FriendListFragment.this.getContext(), -1, friendsList);
             this.friendList = friendsList;
         }
@@ -118,11 +137,11 @@ public class FriendListFragment extends Fragment {
             }
 
             friendName = convertView.findViewById(R.id.textView_friendItem_friendName);
-            friendRecipe = convertView.findViewById(R.id.textView_friendItem_friendRecipe);
 
 
-            friendName.setText(friendList.get(position).getRecipeName());
-            friendRecipe.setText(friendList.get(position).getRecipeName());
+
+            friendName.setText(friendList.get(position).getProperty("username").toString());
+
 
             return convertView;
         }
