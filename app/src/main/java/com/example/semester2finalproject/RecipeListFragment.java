@@ -67,9 +67,9 @@ public class RecipeListFragment extends Fragment {
 
         Backendless.Data.of(Recipe.class).find(queryBuilder, new AsyncCallback<List<Recipe>>(){
             @Override
-            public void handleResponse(final List<Recipe> foundFriends)
+            public void handleResponse(final List<Recipe> foundRecipes)
             {
-                recipeAdapter = new RecipeAdapter(foundFriends);
+                recipeAdapter = new RecipeAdapter(foundRecipes);
                 listView.setAdapter(recipeAdapter);
 
                 // we're sure that the list of friends exists at this point in the code
@@ -77,7 +77,7 @@ public class RecipeListFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Intent detailIntent = new Intent(Recipe.class, RecipeDetailActivity.class);
-                        detailIntent.putExtra(EXTRA_FRIEND, foundFriends.get(i));
+                        detailIntent.putExtra(EXTRA_RECIPE, foundRecipes.get(i));
                         startActivity(detailIntent);
                     }
                 });
@@ -108,7 +108,7 @@ public class RecipeListFragment extends Fragment {
         private int position;
 
         public RecipeAdapter(List<Recipe> friendsList) {
-            super(FriendListFragment.this, -1, friendsList);
+            super(RecipeListFragment.this.getContext(), -1, friendsList);
             this.friendsList = friendsList;
         }
 
@@ -133,6 +133,8 @@ public class RecipeListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_recipes, container, false);
+        loadDataFromBackendless();
+
     }
 }
 }
