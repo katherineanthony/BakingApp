@@ -76,7 +76,7 @@ public class RecipeListFragment extends Fragment {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent detailIntent = new Intent(Recipe.class, RecipeDetailActivity.class);
+                        Intent detailIntent = new Intent(RecipeListFragment.this.getContext(), RecipeDetailActivity.class);
                         detailIntent.putExtra(EXTRA_RECIPE, foundRecipes.get(i));
                         startActivity(detailIntent);
                     }
@@ -88,20 +88,13 @@ public class RecipeListFragment extends Fragment {
             @Override
             public void handleFault( BackendlessFault fault )
             {
-                Toast.makeText(RecipeListFragment.this, fault.getDetail(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecipeListFragment.this.getContext(), fault.getDetail(), Toast.LENGTH_SHORT).show();
                 // an error has occurred, the error code can be retrieved with fault.getCode()
             }
         });
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+
 
     private class RecipeAdapter extends ArrayAdapter{
         private List<Recipe> friendsList;
