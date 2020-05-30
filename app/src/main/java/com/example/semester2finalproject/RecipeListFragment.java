@@ -95,7 +95,7 @@ public class RecipeListFragment extends Fragment {
             this.position = position;
             LayoutInflater inflater = getLayoutInflater();
             if (convertView == null) {
-                convertView = inflater.inflate(R.layout.item_friend, parent, false);
+                convertView = inflater.inflate(R.layout.item_recipe, parent, false);
             }
 
             textViewName = convertView.findViewById(R.id.textview_recipe_name);
