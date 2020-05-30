@@ -118,8 +118,14 @@ public class RecipeListFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootview =  inflater.inflate(R.layout.fragment_recipes, container, false);
         loadDataFromBackendless();
+        wireWidgets(rootview);
 
         return rootview;
+
+
+    }
+
+    private void wireWidgets(View rootview) {
 
 
     }
