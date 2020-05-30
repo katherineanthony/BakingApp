@@ -23,18 +23,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RecipeListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class RecipeListFragment extends Fragment {
     public static final String EXTRA_RECIPE = "Recipe";
 
     private ListView listView;
     private RecipeAdapter recipeAdapter;
     private TextView textViewName;
-    private Comparator<Recipe> comparator;
+
 
 
 
@@ -126,6 +122,8 @@ public class RecipeListFragment extends Fragment {
     }
 
     private void wireWidgets(View rootview) {
+        listView = rootview.findViewById(R.id.listview_fragment_recipes);
+        textViewName = rootview.findViewById(R.id.textview_recipe_name);
 
 
     }
