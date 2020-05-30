@@ -82,13 +82,6 @@ public class RecipeListFragment extends Fragment {
                     }
                 });
 
-                floatingActionButtonNewFriend.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent newFriendIntent = new Intent(FriendListActivity.this, FriendDetailActivity.class);
-                        startActivity(newFriendIntent);
-                    }
-                });
 
 
             }
@@ -99,38 +92,6 @@ public class RecipeListFragment extends Fragment {
                 // an error has occurred, the error code can be retrieved with fault.getCode()
             }
         });
-    }
-    private class FriendAdapter extends ArrayAdapter {
-        private List<Recipe> recipeList;
-        private int position;
-
-        public FriendAdapter(List<Recipe> recipeList) {
-            super(RecipeListFragment.this, -1, recipeList);
-            this.recipeList = recipeList;
-        }
-
-        public List<Recipe> getFriendsList() {
-            return recipeList;
-        }
-
-        public void setFriendsList(List<Recipe> friendsList) {
-            this.recipeList = friendsList;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            this.position = position;
-            LayoutInflater inflater = getLayoutInflater();
-            if(convertView == null){
-                convertView = inflater.inflate(R.layout.item_recipe, parent, false);
-            }
-
-            textViewName = convertView.findViewById(R.id.textview_recipe_name);
-
-            textViewName.setText(recipeList.get(position).getRecipeName());
-
-            return convertView;
-        }
     }
 
     @Override
@@ -161,7 +122,7 @@ public class RecipeListFragment extends Fragment {
 
             textViewName = convertView.findViewById(R.id.textview_recipe_name);
 
-            textViewName.setText(friendsList.get(position).getName());
+            textViewName.setText(friendsList.get(position).getRecipeName());
 
             return convertView;
         }
@@ -173,4 +134,5 @@ public class RecipeListFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_recipes, container, false);
     }
+}
 }
