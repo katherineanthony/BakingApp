@@ -24,7 +24,7 @@
             android:title="@string/Friends" />
         <item
             android:id="@+id/addFriend"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/ic_menu_add_friend"
             android:title="Add Friend"
             />
         //wiojaeuiofhuyeasfg ytu abdsfbjuytgadsfuyasdgiuyfasdfgyusfgyu
