@@ -100,6 +100,42 @@ public class RecipeListFragment extends Fragment {
             }
         });
     }
+    private class FriendAdapter extends ArrayAdapter {
+        private List<Friend> friendsList;
+        private int position;
+
+        public FriendAdapter(List<Friend> friendsList) {
+            super(FriendListActivity.this, -1, friendsList);
+            this.friendsList = friendsList;
+        }
+
+        public List<Friend> getFriendsList() {
+            return friendsList;
+        }
+
+        public void setFriendsList(List<Friend> friendsList) {
+            this.friendsList = friendsList;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            this.position = position;
+            LayoutInflater inflater = getLayoutInflater();
+            if(convertView == null){
+                convertView = inflater.inflate(R.layout.item_friend, parent, false);
+            }
+
+            textViewName = convertView.findViewById(R.id.textView_item_friend_name);
+            textViewClumsiness = convertView.findViewById(R.id.textView_item_friend_clumsiness);
+            textViewMoneyOwed = convertView.findViewById(R.id.textView_item_friend_money_owed);
+
+            textViewName.setText(friendsList.get(position).getName());
+            textViewClumsiness.setText(String.valueOf(friendsList.get(position).getClumsiness()));
+            textViewMoneyOwed.setText(String.valueOf(friendsList.get(position).getMoneyOwed()));
+
+            return convertView;
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
