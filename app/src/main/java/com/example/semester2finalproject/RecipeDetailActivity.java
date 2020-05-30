@@ -10,7 +10,6 @@ import com.example.semester2finalproject.ui.recipedetail.RecipeDetailFragment;
 
 public class RecipeDetailActivity extends AppCompatActivity {
 
-    private ImageView recipeImage;
     private EditText recipeName;
     private EditText recipeIngredients;
     private EditText recipeSteps;
@@ -35,7 +34,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
     }
 
     private void wireWidgets() {
-        recipeImage=findViewById(R.id.imageView_recipeDetail_recipeImage);
         recipeIngredients=findViewById(R.id.editText_recipeDetail_ingredients);
         recipeName=findViewById(R.id.editText_recipeDetail_name);
         recipeSteps=findViewById(R.id.editText_recipeDetail_recipe);
