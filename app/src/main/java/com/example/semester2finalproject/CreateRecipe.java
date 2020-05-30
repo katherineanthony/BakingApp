@@ -19,17 +19,17 @@ import com.backendless.exceptions.BackendlessFault;
 public class CreateRecipe extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    //private static final String ARG_PARAM1 = "param1";
+    //private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    //private String mParam1;
+    //private String mParam2;
     private EditText directions;
     private EditText ingredients;
     private EditText recipeName;
     private Button saveButton;
-    private Recipe recipe;
+    private Recipe recipeNew;
 
 
 
@@ -48,10 +48,11 @@ public class CreateRecipe extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recipe.setDirections(directions.getText().toString());
-                recipe.setRecipeName(recipeName.getText().toString());
-                recipe.setIngredients(ingredients.getText().toString());
-                Backendless.Data.of(Recipe.class).save(recipe, new AsyncCallback<Recipe>() {
+                recipeNew = new Recipe();
+                recipeNew.setDirections(directions.getText().toString());
+                recipeNew.setRecipeName(recipeName.getText().toString());
+                recipeNew.setIngredients(ingredients.getText().toString());
+                Backendless.Persistence.save(recipeNew, new AsyncCallback<Recipe>() {
                     @Override
                     public void handleResponse(Recipe response) {
                         Toast.makeText(CreateRecipe.this.getContext(), "it worked", Toast.LENGTH_SHORT).show();
