@@ -2,9 +2,9 @@
     <string name="app_name">Semester 2 Final Project</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">Baking Recipes</string>
+    <string name="nav_header_subtitle">make new recipes</string>
+    <string name="nav_header_desc">Find new Friends!</string>
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
