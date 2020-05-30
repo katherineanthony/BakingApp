@@ -22,5 +22,11 @@
             android:id="@+id/nav_friends"
             android:icon="@drawable/ic_menu_friends"
             android:title="@string/Friends" />
+        <item
+            android:id="@+id/addFriend"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Add Friend"
+            />
+        //wiojaeuiofhuyeasfg ytu abdsfbjuytgadsfuyasdgiuyfasdfgyusfgyu
     </group>
 </menu>

@@ -45,4 +45,9 @@
         android:name="com.example.semester2finalproject.FriendListFragment"
         android:label="@string/Friends"
         tools:layout="@layout/fragment_friends" />
+    <fragment
+        android:id="@+id/addFriend"
+        android:name="com.example.semester2finalproject.AddFriend"
+        android:label="fragment_add_friend"
+        tools:layout="@layout/fragment_add_friend" />
 </navigation>
