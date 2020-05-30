@@ -44,7 +44,7 @@ public class RecipeListFragment extends Fragment {
 //        return fragment;
 //    }
     public void loadDataFromBackendless(){
-        Backendless.initApp(this, Backendless.getApplicationId(), Backendless.getApiKey());
+        Backendless.initApp(this.getContext(), Credentials.APP_ID, Credentials.API_KEY);
         //search only for Friends with ownerIds that match the user's objectId
         String userId = Backendless.UserService.CurrentUser().getObjectId();
         String whereClause = "ownerId = " + "'" + userId + "'";
