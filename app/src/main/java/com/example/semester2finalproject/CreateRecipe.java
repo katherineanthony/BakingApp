@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class CreateRecipe extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview =  inflater.inflate(R.layout.fragment_create_recipe, container, false);
+        recipe = new Recipe();
         wireWidgets(rootview);
         setListeners();
         return inflater.inflate(R.layout.fragment_create_recipe, container, false);
@@ -48,6 +50,7 @@ public class CreateRecipe extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("TEST", "ARRRGGGGGHHHH ");
                 recipe.setDirections(directions.getText().toString());
                 recipe.setRecipeName(recipeName.getText().toString());
                 recipe.setIngredients(ingredients.getText().toString());
