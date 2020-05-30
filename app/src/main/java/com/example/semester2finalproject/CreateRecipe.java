@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 
 /**
@@ -23,6 +24,10 @@ public class CreateRecipe extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private EditText directions;
+    private EditText ingredients;
+    private EditText recipeName;
+    private Recipe recipe;
 
     public CreateRecipe() {
         // Required empty public constructor
@@ -59,6 +64,25 @@ public class CreateRecipe extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View rootview =  inflater.inflate(R.layout.fragment_create_recipe, container, false);
+        wireWidgets(rootview);
+        setOnClickListeners();
         return inflater.inflate(R.layout.fragment_create_recipe, container, false);
     }
+
+    private void setOnClickListeners() {
+        recipe.setDirections(directions.getText().toString());
+        recipe.setRecipeName(recipeName.getText().toString());
+        recipe.setIngredients(ingredients.getText().toString());
+    }
+
+    private void wireWidgets(View rootview) {
+
+        ingredients=rootview.findViewById(R.id.editText_createRecipe_ingredients);
+        recipeName=rootview.findViewById(R.id.editText_createRecipe_recipeName);
+        directions=rootview.findViewById(R.id.editText_createRecipe_directions);
+
+    }
+
+
 }
