@@ -78,7 +78,7 @@ public class RecipeListFragment extends Fragment {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent detailIntent = new Intent(FriendListActivity.this, FriendDetailActivity.class);
+                        Intent detailIntent = new Intent(Recipe.class, RecipeDetailActivity.class);
                         detailIntent.putExtra(EXTRA_FRIEND, foundFriends.get(i));
                         startActivity(detailIntent);
                     }
