@@ -47,10 +47,10 @@ public class AddFriend extends Fragment {
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = username_editText.getText().toString();
+                String whereClasue = "username = " + "'" + username_editText.getText().toString() + "'";
                 
                 Backendless.Persistence.of(BackendlessUser.class).addRelation(Backendless.UserService.CurrentUser(),
-                        "friend", "username = " + username, new AsyncCallback<Integer>() {
+                        "users:Users:n", whereClasue, new AsyncCallback<Integer>() {
                             @Override
                             public void handleResponse(Integer response) {
                                 Toast.makeText(AddFriend.this.getContext(), "Friend Added", Toast.LENGTH_SHORT).show();
@@ -59,7 +59,7 @@ public class AddFriend extends Fragment {
 
                             @Override
                             public void handleFault(BackendlessFault fault) {
-                                Toast.makeText(AddFriend.this.getContext(), fault.getDetail(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddFriend.this.getContext(), fault.getMessage(), Toast.LENGTH_SHORT).show();
 
                             }
                         });
