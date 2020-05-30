@@ -36,27 +36,17 @@ public class RecipeListFragment extends Fragment {
     private TextView textViewName;
     private Comparator<Recipe> comparator;
 
-    public RecipeListFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Recipes.
-     */
+
     // TODO: Rename and change types and number of parameters
-    public static RecipeListFragment newInstance(String param1, String param2) {
-        RecipeListFragment fragment = new RecipeListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    public static RecipeListFragment newInstance(String param1, String param2) {
+//        RecipeListFragment fragment = new RecipeListFragment();
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
     public void loadDataFromBackendless(){
         Backendless.initApp(this, Backendless.getApplicationId(), Backendless.getApiKey());
         //search only for Friends with ownerIds that match the user's objectId
@@ -96,7 +86,7 @@ public class RecipeListFragment extends Fragment {
 
 
 
-    private class RecipeAdapter extends ArrayAdapter{
+    private class RecipeAdapter extends ArrayAdapter {
         private List<Recipe> friendsList;
         private int position;
 
@@ -109,7 +99,7 @@ public class RecipeListFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             this.position = position;
             LayoutInflater inflater = getLayoutInflater();
-            if(convertView == null){
+            if (convertView == null) {
                 convertView = inflater.inflate(R.layout.item_friend, parent, false);
             }
 
@@ -119,15 +109,19 @@ public class RecipeListFragment extends Fragment {
 
             return convertView;
         }
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipes, container, false);
+        View rootview =  inflater.inflate(R.layout.fragment_recipes, container, false);
         loadDataFromBackendless();
 
+        return rootview;
+
+
     }
-}
+
 }
